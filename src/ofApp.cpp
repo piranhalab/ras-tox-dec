@@ -6,12 +6,14 @@ void ofApp::setup(){
   ofSetVerticalSync(true);
   ofSetLogLevel(OF_LOG_VERBOSE);
 
+  ofSetFrameRate(10);  
   //printer.open("/dev/tty.PL2303-00002014");
   printer.open("/dev/serial0");    
   // img.loadImage("tox3.jpeg");
   //   video.initGrabber(640, 480);
 
   modo = 0; 
+  contador = 1; 
   
 }
 
@@ -19,22 +21,21 @@ void ofApp::setup(){
 void ofApp::update(){
   //	video.update();
   
-  if(contador % 200 == 0){
-      choose(); 
-    }
-
-    contador++;
-    //ofLog(OF_LOG_NOTICE, ofToString(contador)); 
-    
+  if(contador % 500 == 0){
+    choose(); 
+  }
+  
+  contador = contador + 1;
+  // ofLog(OF_LOG_NOTICE, ofToString(contador)); 
+  
 }
 
 //--------------------------------------------------------------
+
 void ofApp::draw(){
   
-    ofBackground(0);
+  // ofBackground(0);
     //video.draw(0,0);
-
-
     
 }
 
@@ -43,7 +44,18 @@ void ofApp::exit(){
 }
 
 void ofApp::choose(){
-  ofLog(OF_LOG_NOTICE, ofToString((int)ofRandom(108))+".jpg");
+
+  // ofLog(OF_LOG_NOTICE, ofToString((int)ofRandom(108))+".jpg");
+
+  // ofBackground(0);
+
+  img.loadImage("toxica/"+ofToString((int)ofRandom(108))+".jpg");
+
+  // ofSleepMillis(5000);
+  // img.draw(); // funcionara? puede ir comentado, realmente no estamos dibujando
+  printer.print(img,127);
+  
+  
 }
 
 //--------------------------------------------------------------
