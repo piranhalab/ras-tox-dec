@@ -28,6 +28,10 @@ public:
   int modo;
   int contador;
   string archivo; 
+  GPIO gpio18;
+  int imprime;
+  int estado; 
+
   // ofVideoGrabber  video;
   // ofxOMXVideoGrabber videoGrabber;
 

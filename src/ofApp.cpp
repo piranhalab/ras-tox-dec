@@ -12,22 +12,47 @@ void ofApp::setup(){
   // img.loadImage("tox3.jpeg");
   //   video.initGrabber(640, 480);
 
-  modo = 0; 
-  contador = 1; 
+  modo = 0;
+  contador = 1;
   
+  estado = 0; 
+  imprime = 0; 
+
+  gpio18.setup("17"); 
+  gpio18.export_gpio();
+  gpio18.setdir_gpio("in");
+  // imprime = false; 
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
   //	video.update();
-  
+
+  /*
   if(contador % 500 == 0){
     choose(); 
   }
   
   contador = contador + 1;
   // ofLog(OF_LOG_NOTICE, ofToString(contador)); 
-  
+  */
+
+  gpio18.getval_gpio(imprime);
+
+  if(imprime == 1 ){
+      choose(); 
+     //ofLog(OF_LOG_NOTICE, "imprime"); 
+     //  imprime = 0; 
+      // ofSleepMillis(5000);
+  }
+
+   //ofSleepMillis(5000); 
+
+  // gpio18.getval_gpio(imprime);
+
+   // estado = imprime; 
+
 }
 
 //--------------------------------------------------------------
