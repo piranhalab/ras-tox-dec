@@ -16,6 +16,17 @@ por
 
 ``#define BYTE_TIME 11L / BAUDRATE``
 
+## Inicializar
+
+`sudo nano /home/pi/.bashrc`
+`cd openFrameworks/apps/myApps/ras-tox-dec`
+`make RunRelease`
+
+## Terminar 
+
+`crontab -e`
+`0 */8 * * * sudo poweroff`
+
 ## Modo
 
 - [ ] Modo 0: rastros

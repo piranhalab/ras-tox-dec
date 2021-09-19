@@ -7,6 +7,7 @@ void ofApp::setup(){
   ofSetLogLevel(OF_LOG_VERBOSE);
 
   ofSetFrameRate(10);  
+  // printer.close(); 
   //printer.open("/dev/tty.PL2303-00002014");
   printer.open("/dev/serial0");    
   // img.loadImage("tox3.jpeg");
@@ -21,7 +22,8 @@ void ofApp::setup(){
   gpio18.setup("17"); 
   gpio18.export_gpio();
   gpio18.setdir_gpio("in");
-  // imprime = false; 
+  // imprime = false;
+  // ofSleepMillis(5000); 
 
 }
 
@@ -41,10 +43,18 @@ void ofApp::update(){
   gpio18.getval_gpio(imprime);
 
   if(imprime == 1 ){
-      choose(); 
-     //ofLog(OF_LOG_NOTICE, "imprime"); 
-     //  imprime = 0; 
+    if(estado == 0){
+      // choose();
+      estado = 1;
+      choose();
+      
+
+      // ofLog(OF_LOG_NOTICE, bPrinting); 
+      //  imprime = 0; 
       // ofSleepMillis(5000);
+    }
+  } else {
+    estado = 0; 
   }
 
    //ofSleepMillis(5000); 
@@ -74,12 +84,15 @@ void ofApp::choose(){
 
   // ofBackground(0);
 
-  img.loadImage("toxica/"+ofToString((int)ofRandom(108))+".jpg");
+  img.loadImage("toxica/toxica"+ofToString((int)ofRandom(2))+".jpg");
 
   // ofSleepMillis(5000);
   // img.draw(); // funcionara? puede ir comentado, realmente no estamos dibujando
   printer.print(img,127);
-  
+  // printer.feed(); 
+  // ofSleepMillis(5000); 
+  // printer.println("                                                                               ");
+ 
   
 }
 
