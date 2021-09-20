@@ -13,15 +13,17 @@ void ofApp::setup(){
   // img.loadImage("tox3.jpeg");
   //   video.initGrabber(640, 480);
 
-  modo = 0;
+  modo = 1;
   contador = 1;
   
   estado = 0; 
   imprime = 0; 
 
-  gpio18.setup("17"); 
-  gpio18.export_gpio();
-  gpio18.setdir_gpio("in");
+  if(modo == 0){
+    gpio18.setup("17"); 
+    gpio18.export_gpio();
+    gpio18.setdir_gpio("in");
+  }
   // imprime = false;
   // ofSleepMillis(5000); 
 
@@ -29,39 +31,35 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
   //	video.update();
 
-  /*
-  if(contador % 500 == 0){
-    choose(); 
-  }
+  //------------------------------Toxica 
   
-  contador = contador + 1;
-  // ofLog(OF_LOG_NOTICE, ofToString(contador)); 
-  */
-
-  gpio18.getval_gpio(imprime);
-
-  if(imprime == 1 ){
-    if(estado == 0){
-      // choose();
-      estado = 1;
-      choose();
-      
-
-      // ofLog(OF_LOG_NOTICE, bPrinting); 
-      //  imprime = 0; 
-      // ofSleepMillis(5000);
+  if(modo == 0){
+    gpio18.getval_gpio(imprime);
+    
+    if(imprime == 1 ){
+      if(estado == 0){
+	estado = 1;
+	choose();      
+      }
+    } else {
+      estado = 0; 
     }
-  } else {
-    estado = 0; 
   }
 
-   //ofSleepMillis(5000); 
+  //------------------------------Rastros  
 
-  // gpio18.getval_gpio(imprime);
+  if(modo == 1){
+    if(contador % 400 == 0){
+      choose(); 
+    }
+    contador = contador + 1;
+    // ofLog(OF_LOG_NOTICE, ofToString(contador) );
 
-   // estado = imprime; 
+  
+  }
 
 }
 
@@ -80,19 +78,13 @@ void ofApp::exit(){
 
 void ofApp::choose(){
 
-  // ofLog(OF_LOG_NOTICE, ofToString((int)ofRandom(108))+".jpg");
+  //------------------------------Toxica y rastros 
 
-  // ofBackground(0);
+   ofLog(OF_LOG_NOTICE, "hola");
 
-  img.loadImage("toxica/toxica"+ofToString((int)ofRandom(2))+".jpg");
-
-  // ofSleepMillis(5000);
-  // img.draw(); // funcionara? puede ir comentado, realmente no estamos dibujando
-  printer.print(img,127);
-  // printer.feed(); 
-  // ofSleepMillis(5000); 
-  // printer.println("                                                                               ");
- 
+    img.loadImage("rastros/"+ofToString((int)ofRandom(38)+1)+".jpg");
+    // img.draw(); // funcionara? puede ir comentado, realmente no estamos dibujando
+    printer.print(img,127);
   
 }
 

@@ -19,7 +19,9 @@ por
 ## Inicializar
 
 `sudo nano /home/pi/.bashrc`
+
 `cd openFrameworks/apps/myApps/ras-tox-dec`
+
 `make RunRelease`
 
 ## Terminar 
